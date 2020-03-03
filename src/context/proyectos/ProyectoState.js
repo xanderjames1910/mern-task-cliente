@@ -1,5 +1,6 @@
 import React, { useReducer } from 'react';
-import uuid from 'uuid/v4';
+import { v4 as uuidv4 } from 'uuid';
+import PropTypes from 'prop-types';
 
 import proyectoContext from './proyectoContext';
 import proyectoReducer from './proyectoReducer';
@@ -48,7 +49,7 @@ const ProyectoState = props => {
 
 	// Agregar nuevo proyecto
 	const agregarProyecto = proyecto => {
-		proyecto.id = uuid();
+		proyecto.id = uuidv4();
 
 		// Insertar el proyecto en el state
 		dispatch({
@@ -99,6 +100,10 @@ const ProyectoState = props => {
 			{children}
 		</proyectoContext.Provider>
 	);
+};
+
+ProyectoState.propTypes = {
+	children: PropTypes.object.isRequired,
 };
 
 export default ProyectoState;
