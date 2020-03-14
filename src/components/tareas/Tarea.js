@@ -14,7 +14,7 @@ const Tarea = ({ tarea }) => {
 	const {
 		eliminarTarea,
 		obtenerTareas,
-		cambiaEstadoTarea,
+		actualizarTarea,
 		guardarTareaActual,
 	} = tareasContext;
 
@@ -23,18 +23,18 @@ const Tarea = ({ tarea }) => {
 
 	// Función que se ejecuta cuando el usuario presiona el btn de eliminar tarea
 	const tareaElimninar = id => {
-		eliminarTarea(id);
+		eliminarTarea(id, proyectoActual._id);
 		obtenerTareas(proyectoActual.id);
 	};
 
 	// Función que modifica el estado de las tareas
-	const cambiaEstado = tareaObj => {
+	const cambiarEstado = tareaObj => {
 		if (tarea.estado) {
 			tarea.estado = false;
 		} else {
 			tarea.estado = true;
 		}
-		cambiaEstadoTarea(tareaObj);
+		actualizarTarea(tareaObj);
 	};
 
 	// Agrega una tarea actual cuando el usuario desea editarla
@@ -50,14 +50,14 @@ const Tarea = ({ tarea }) => {
 					<button
 						type='button'
 						className='completo'
-						onClick={() => cambiaEstado(tarea)}>
+						onClick={() => cambiarEstado(tarea)}>
 						Completo
 					</button>
 				) : (
 					<button
 						type='button'
 						className='incompleto'
-						onClick={() => cambiaEstado(tarea)}>
+						onClick={() => cambiarEstado(tarea)}>
 						Incompleto
 					</button>
 				)}
@@ -72,7 +72,7 @@ const Tarea = ({ tarea }) => {
 				<button
 					type='button'
 					className='btn btn-secundario'
-					onClick={() => tareaElimninar(tarea.id)}>
+					onClick={() => tareaElimninar(tarea._id)}>
 					Eliminar
 				</button>
 			</div>
